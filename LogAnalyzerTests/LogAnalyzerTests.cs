@@ -37,7 +37,6 @@ namespace LogAn.UnitTests
         }
 
         [Test]
-        [Ignore("there is a problem with this test")]
         public void IsValidLogFileName_EmptyFileName_ThrowsException()
         {
 
