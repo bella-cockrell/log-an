@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace LogAn.UnitTests
 {
@@ -15,6 +16,7 @@ namespace LogAn.UnitTests
         }
 
         [Test]
+        [Category("Extensions")]
         public void IsValidLogFileName_BadExtension_ReturnsFalse()
         {
 
@@ -25,12 +27,24 @@ namespace LogAn.UnitTests
 
         [TestCase("goodfileextension.slf")]
         [TestCase("goodfileextension.SLF")]
+        [Category("Extensions")]
         public void IsValidLogFileName_ValidExtensions_ReturnsTrue(string file)
         {
 
             bool result = m_analyzer.IsValidLogFileName(file);
 
             Assert.True(result);
+        }
+
+        [Test]
+        [Ignore("there is a problem with this test")]
+        public void IsValidLogFileName_EmptyFileName_ThrowsException()
+        {
+
+            var ex = Assert.Catch<Exception>(() => m_analyzer.IsValidLogFileName(""));
+
+            StringAssert.Contains("filename has to be provided", ex.Message);
+            Assert.That(ex.Message, Does.Contain("filename has to be provided"));
         }
     }
 }

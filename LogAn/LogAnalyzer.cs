@@ -11,6 +11,11 @@ namespace LogAn
                 return false;
             }
 
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentException("filename has to be provided");
+            }
+
             return true;
         }
 
