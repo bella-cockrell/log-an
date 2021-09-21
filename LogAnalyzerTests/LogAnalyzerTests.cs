@@ -5,13 +5,20 @@ namespace LogAn.UnitTests
     [TestFixture]
     public class LogAnalyzerTests
     {
+        private LogAnalyzer m_analyzer = null;
+
+        [SetUp]
+        public void Setup()
+        {
+            m_analyzer = new LogAnalyzer();
+
+        }
 
         [Test]
         public void IsValidLogFileName_BadExtension_ReturnsFalse()
         {
-            LogAnalyzer analyzer = new();
 
-            bool result = analyzer.IsValidLogFileName("badfileextension.foo");
+            bool result = m_analyzer.IsValidLogFileName("badfileextension.foo");
 
             Assert.False(result);
         }
@@ -20,9 +27,8 @@ namespace LogAn.UnitTests
         [TestCase("goodfileextension.SLF")]
         public void IsValidLogFileName_ValidExtensions_ReturnsTrue(string file)
         {
-            LogAnalyzer analyzer = new();
 
-            bool result = analyzer.IsValidLogFileName(file);
+            bool result = m_analyzer.IsValidLogFileName(file);
 
             Assert.True(result);
         }
