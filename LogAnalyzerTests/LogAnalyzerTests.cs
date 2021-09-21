@@ -45,5 +45,13 @@ namespace LogAn.UnitTests
             StringAssert.Contains("filename has to be provided", ex.Message);
             Assert.That(ex.Message, Does.Contain("filename has to be provided"));
         }
+
+        [Test]
+        public void IsValidLogFileName_WhenCalled_ChangesWasLastFileNameValid()
+        {
+            m_analyzer.IsValidLogFileName("heresabadextension.bar");
+
+            Assert.False(m_analyzer.WasLastFileNameValid);
+        }
     }
 }
