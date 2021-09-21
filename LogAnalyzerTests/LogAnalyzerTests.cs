@@ -16,22 +16,13 @@ namespace LogAn.UnitTests
             Assert.False(result);
         }
 
-        [Test]
-        public void IsValidLogFileName_GoodExtensionLowerCase_ReturnsTrue()
+        [TestCase("goodfileextension.slf")]
+        [TestCase("goodfileextension.SLF")]
+        public void IsValidLogFileName_ValidExtensions_ReturnsTrue(string file)
         {
             LogAnalyzer analyzer = new();
 
-            bool result = analyzer.IsValidLogFileName("goodfileextension.slf");
-
-            Assert.True(result);
-        }
-
-        [Test]
-        public void IsValidLogFileName_GoodExtensionUpperCase_ReturnsTrue()
-        {
-            LogAnalyzer analyzer = new();
-
-            bool result = analyzer.IsValidLogFileName("goodfileextension.SLF");
+            bool result = analyzer.IsValidLogFileName(file);
 
             Assert.True(result);
         }
