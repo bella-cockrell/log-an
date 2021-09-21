@@ -6,21 +6,21 @@ namespace LogAn.UnitTests
     [TestFixture]
     public class LogAnalyzerTests
     {
-        private LogAnalyzer m_analyzer = null;
-
-        [SetUp]
-        public void Setup()
+        private static LogAnalyzer MakeLogAnalyzer()
         {
-            m_analyzer = new LogAnalyzer();
-
+            return new LogAnalyzer();
+            //we have this method because if the constructor for LogAnalyzer
+            //changes, we only need to change in one place. This uses the
+            //factory pattern as opposed to the SetUp attribute
         }
 
         [Test]
         [Category("Extensions")]
         public void IsValidLogFileName_BadExtension_ReturnsFalse()
         {
+            var la = MakeLogAnalyzer();
 
-            bool result = m_analyzer.IsValidLogFileName("badfileextension.foo");
+            bool result = la.IsValidLogFileName("badfileextension.foo");
 
             Assert.False(result);
         }
@@ -30,8 +30,9 @@ namespace LogAn.UnitTests
         [Category("Extensions")]
         public void IsValidLogFileName_ValidExtensions_ReturnsTrue(string file)
         {
+            var la = MakeLogAnalyzer();
 
-            bool result = m_analyzer.IsValidLogFileName(file);
+            bool result = la.IsValidLogFileName(file);
 
             Assert.True(result);
         }
@@ -40,7 +41,9 @@ namespace LogAn.UnitTests
         public void IsValidLogFileName_EmptyFileName_ThrowsException()
         {
 
-            var ex = Assert.Catch<Exception>(() => m_analyzer.IsValidLogFileName(""));
+            var la = MakeLogAnalyzer();
+
+            var ex = Assert.Catch<Exception>(() => la.IsValidLogFileName(""));
 
             StringAssert.Contains("filename has to be provided", ex.Message);
             Assert.That(ex.Message, Does.Contain("filename has to be provided"));
@@ -50,9 +53,12 @@ namespace LogAn.UnitTests
         [TestCase("heresabadextension.slf", true)]
         public void IsValidLogFileName_WhenCalled_ChangesWasLastFileNameValid(string fileName, bool expected)
         {
-            m_analyzer.IsValidLogFileName(fileName);
+            var la = MakeLogAnalyzer();
 
-            Assert.AreEqual(expected, m_analyzer.WasLastFileNameValid);
+            la.IsValidLogFileName(fileName);
+
+            Assert.AreEqual(expected, la.WasLastFileNameValid);
         }
+
     }
 }
