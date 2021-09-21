@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogAnLibrary", "LogAnLibrary\LogAnLibrary.csproj", "{5C38F28A-BFDB-4A82-B1E9-EF39CCFED37C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{83831BD3-79FC-4055-AB30-A5BE98B284A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C38F28A-BFDB-4A82-B1E9-EF39CCFED37C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C38F28A-BFDB-4A82-B1E9-EF39CCFED37C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C38F28A-BFDB-4A82-B1E9-EF39CCFED37C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C38F28A-BFDB-4A82-B1E9-EF39CCFED37C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83831BD3-79FC-4055-AB30-A5BE98B284A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83831BD3-79FC-4055-AB30-A5BE98B284A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83831BD3-79FC-4055-AB30-A5BE98B284A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83831BD3-79FC-4055-AB30-A5BE98B284A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7828BD43-2AD9-49C2-B985-C6BC11EBA851}
+	EndGlobalSection
+EndGlobal
