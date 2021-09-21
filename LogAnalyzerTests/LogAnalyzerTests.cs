@@ -46,12 +46,13 @@ namespace LogAn.UnitTests
             Assert.That(ex.Message, Does.Contain("filename has to be provided"));
         }
 
-        [Test]
-        public void IsValidLogFileName_WhenCalled_ChangesWasLastFileNameValid()
+        [TestCase("heresabadextension.bar", false)]
+        [TestCase("heresabadextension.slf", true)]
+        public void IsValidLogFileName_WhenCalled_ChangesWasLastFileNameValid(string fileName, bool expected)
         {
-            m_analyzer.IsValidLogFileName("heresabadextension.bar");
+            m_analyzer.IsValidLogFileName(fileName);
 
-            Assert.False(m_analyzer.WasLastFileNameValid);
+            Assert.AreEqual(expected, m_analyzer.WasLastFileNameValid);
         }
     }
 }
