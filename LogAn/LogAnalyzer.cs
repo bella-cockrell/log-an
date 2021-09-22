@@ -8,20 +8,15 @@ namespace LogAn
 
         public LogAnalyzer()
         {
-            manager = new FileExtensionManager();
-        }
-        //defines the constructor that can be called by tests
-
-        public IFileExtensionManager FileExtensionManager
-        {
-            get { return manager; }
-            set { manager = value; }
-        }
-
+            var factory = new ExtensionManagerFactory(); //in the examples, these weren't instatiated? 
+            manager = factory.Create();
+        }   
+      
         public bool IsValidLogFileName(string fileName)
         {
 
             return manager.IsValid(fileName);
+                //&& Path.GetFileNameWithoutExtension(fileName).Length > 5;
 
         }
 

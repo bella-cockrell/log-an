@@ -69,11 +69,14 @@ namespace LogAn.UnitTests
 
             myFakeManager.WillBeValid = true; //sets up stub to return true
 
+            var factory = new ExtensionManagerFactory();
+
+            factory.SetManager(myFakeManager); //create analyzer and inject stub
+
             LogAnalyzer log = new LogAnalyzer();
-            log.FileExtensionManager = myFakeManager; //injects stub
 
             bool result = log.IsValidLogFileName("short.ext");
-            Assert.True(result);
+            Assert.False(result);
         }
 
     }
