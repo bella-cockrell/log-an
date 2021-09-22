@@ -4,25 +4,19 @@ namespace LogAn
 {
     public class LogAnalyzer
     {
-        public bool WasLastFileNameValid { get; set; }
+        private IFileExtensionManager manager;
+
+        public LogAnalyzer (IFileExtensionManager extensionManager)
+        {
+            manager = extensionManager;
+        }
+        //defines the constructor that can be called by tests
 
         public bool IsValidLogFileName(string fileName)
         {
-            WasLastFileNameValid = false;
 
-            if (string.IsNullOrEmpty(fileName))
-            {
-                throw new ArgumentException("filename has to be provided");
-            }
+            return manager.IsValid(fileName);
 
-            if (!fileName.EndsWith(".SLF", StringComparison.CurrentCultureIgnoreCase))
-            {
-                return false;
-            }
-
-
-            WasLastFileNameValid = true;
-            return true;
         }
 
     }
