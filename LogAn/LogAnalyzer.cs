@@ -6,11 +6,17 @@ namespace LogAn
     {
         private IFileExtensionManager manager;
 
-        public LogAnalyzer (IFileExtensionManager extensionManager)
+        public LogAnalyzer()
         {
-            manager = extensionManager;
+            manager = new FileExtensionManager();
         }
         //defines the constructor that can be called by tests
+
+        public IFileExtensionManager FileExtensionManager
+        {
+            get { return manager; }
+            set { manager = value; }
+        }
 
         public bool IsValidLogFileName(string fileName)
         {

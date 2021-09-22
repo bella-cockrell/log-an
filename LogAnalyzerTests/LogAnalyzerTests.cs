@@ -8,9 +8,7 @@ namespace LogAn.UnitTests
     {
         private static LogAnalyzer MakeLogAnalyzer()
         {
-            FileExtensionManager fileExtensionManager = new();
-
-            return new LogAnalyzer(fileExtensionManager);
+            return new LogAnalyzer();
             //we have this method because if the constructor for LogAnalyzer
             //changes, we only need to change in one place. This uses the
             //factory pattern as opposed to the SetUp attribute
@@ -65,13 +63,14 @@ namespace LogAn.UnitTests
         }
 
         [Test]
-        public void IsValidFileName_NameSupportedExtension_ReturnsTrue()
+        public void IsValidFileName_SupportedExtension_ReturnsTrue()
         {
             FakeExtensionManager myFakeManager = new();
 
             myFakeManager.WillBeValid = true; //sets up stub to return true
 
-            LogAnalyzer log = new LogAnalyzer(myFakeManager); //sends in stub
+            LogAnalyzer log = new LogAnalyzer();
+            log.FileExtensionManager = myFakeManager; //injects stub
 
             bool result = log.IsValidLogFileName("short.ext");
             Assert.True(result);
