@@ -21,6 +21,6 @@ namespace LogAn
         {
             customManager = mgr;
         }
-
     }
+
 }

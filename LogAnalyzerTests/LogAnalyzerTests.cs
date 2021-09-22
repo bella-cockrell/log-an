@@ -6,9 +6,9 @@ namespace LogAn.UnitTests
     [TestFixture]
     public class LogAnalyzerTests
     {
-        private static LogAnalyzer MakeLogAnalyzer()
+        private static LogAnalyzerUsingFactoryMethod MakeLogAnalyzer()
         {
-            return new LogAnalyzer();
+            return new LogAnalyzerUsingFactoryMethod();
             //we have this method because if the constructor for LogAnalyzer
             //changes, we only need to change in one place. This uses the
             //factory pattern as opposed to the SetUp attribute
@@ -73,10 +73,38 @@ namespace LogAn.UnitTests
 
             factory.SetManager(myFakeManager); //create analyzer and inject stub
 
-            LogAnalyzer log = new LogAnalyzer();
+            LogAnalyzerUsingFactoryMethod log = new LogAnalyzerUsingFactoryMethod();
 
             bool result = log.IsValidLogFileName("short.ext");
             Assert.False(result);
+        }
+
+        [Test]
+        public void overrideTest()
+        {
+            FakeExtensionManager stub = new FakeExtensionManager();
+            stub.WillBeValid = true;
+
+            TestableLogAnalyzer logan = new TestableLogAnalyzer(stub);
+
+            bool result = logan.IsValidLogFileName("file.ext");
+
+            Assert.True(result);
+        }
+
+        class TestableLogAnalyzer : LogAnalyzerUsingFactoryMethod
+        {
+            public TestableLogAnalyzer(IFileExtensionManager mgr)
+            {
+                Manager = mgr;
+            }
+
+            public IFileExtensionManager Manager;
+
+            protected override IFileExtensionManager GetManager()
+            {
+                return Manager;
+            }
         }
 
     }

@@ -2,22 +2,17 @@
 
 namespace LogAn
 {
-    public class LogAnalyzer
+    public class LogAnalyzerUsingFactoryMethod
     {
-        private IFileExtensionManager manager;
-
-        public LogAnalyzer()
-        {
-            var factory = new ExtensionManagerFactory(); //in the examples, these weren't instatiated? 
-            manager = factory.Create();
-        }   
       
         public bool IsValidLogFileName(string fileName)
         {
+            return GetManager().IsValid(fileName); //uses virtual GetManager() method
+        }
 
-            return manager.IsValid(fileName);
-                //&& Path.GetFileNameWithoutExtension(fileName).Length > 5;
-
+        protected virtual IFileExtensionManager GetManager()
+        {
+            return new FileExtensionManager(); //returns hardcoded value
         }
 
     }
